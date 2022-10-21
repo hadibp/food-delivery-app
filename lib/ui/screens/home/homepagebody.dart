@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/ui/componants/constants/constants.dart';
 import 'package:food_delivery/ui/componants/constants/diamention.dart';
+import 'package:food_delivery/ui/componants/widgets/appcolumn.dart';
 import 'package:food_delivery/ui/componants/widgets/bigtext.dart';
 import 'package:food_delivery/ui/componants/widgets/reusable_Icon_and_text.dart';
 import 'package:food_delivery/ui/componants/widgets/smalltext.dart';
@@ -119,45 +120,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                   SizedBox(
                     width: Diamentions.height10,
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const BigText(
-                          text: 'Nutretios fruit dfg ghj hjk',
-                          size: 20.0,
-                          textOverflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(
-                          height: Diamentions.height10,
-                        ),
-                        const SmallText(text: 'with some charachterstics'),
-                        SizedBox(
-                          height: Diamentions.height10,
-                        ),
-                        Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            IconAndTextW(
-                                text: 'Normal',
-                                icon: Icons.circle_sharp,
-                                textsize: 12.0,
-                                iconColor: Colors.orangeAccent),
-                            IconAndTextW(
-                                icon: Icons.location_on,
-                                text: '1.7 Km',
-                                textsize: 12.0,
-                                iconColor: Colorpalatte.maincolor),
-                            IconAndTextW(
-                                icon: Icons.access_time_rounded,
-                                text: '34 min',
-                                textsize: 12.0,
-                                iconColor: Colors.orange)
-                          ],
-                        ),
-                      ],
-                    ),
+                 const Expanded(
+                    child: AppColumn(bigtext: 'nutella orange baby',),
                   )
                 ],
               ),
@@ -305,3 +269,4 @@ class _HomePageBodyState extends State<HomePageBody> {
     );
   }
 }
+
