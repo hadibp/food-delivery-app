@@ -22,6 +22,7 @@ class Diamentions {
   static double height50 = screenHeight / 15.62;
 
   //dynamic width and height
+  static double width5 = screenWidth / 156.2;
   static double width15 = screenWidth / 26.1;
   static double width18 = screenWidth / 21.7;
   static double width30 = screenWidth / 13.0;
@@ -30,7 +31,7 @@ class Diamentions {
   static double font15 = screenHeight / 52.0;
   static double font25 = screenHeight / 31.24;
 
-//icons size
+  //icons size
   static double iconSize = screenHeight / 39.05;
 
   //radious
