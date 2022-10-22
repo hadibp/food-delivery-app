@@ -20,6 +20,7 @@ class Diamentions {
   static double height20 = screenHeight / 39.05;
   static double height30 = screenHeight / 26.03;
   static double height50 = screenHeight / 15.62;
+  static double height320 = screenHeight / 2.44;
 
   //dynamic width and height
   static double width5 = screenWidth / 156.2;

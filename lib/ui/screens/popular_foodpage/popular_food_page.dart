@@ -4,6 +4,7 @@ import 'package:food_delivery/ui/componants/constants/diamention.dart';
 import 'package:food_delivery/ui/componants/widgets/appcolumn.dart';
 import 'package:food_delivery/ui/componants/widgets/appicon.dart';
 import 'package:food_delivery/ui/componants/widgets/bigtext.dart';
+import 'package:food_delivery/ui/componants/widgets/expandable_widget_text.dart';
 import 'package:food_delivery/ui/componants/widgets/smalltext.dart';
 
 class PopularFoodDetail extends StatelessWidget {
@@ -52,12 +53,18 @@ class PopularFoodDetail extends StatelessWidget {
             right: 0,
             top: Diamentions.foodpageImageheight - 30,
             child: Container(
-              padding: EdgeInsets.all(Diamentions.width18),
+              height: Diamentions.height320,
+              padding: EdgeInsets.only(
+                  top: Diamentions.width18,
+                  left: Diamentions.width18,
+                  right: Diamentions.width18,
+                  ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(Diamentions.radious20),
                       topRight: Radius.circular(Diamentions.radious20)),
-                  color: Colors.redAccent),
+                    color: Colors.white
+                  ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -67,15 +74,25 @@ class PopularFoodDetail extends StatelessWidget {
                   SizedBox(
                     height: Diamentions.height20,
                   ),
-                  const BigText(text: "introduce")
+                  const BigText(text: "introduce"),
+                  SizedBox(
+                    height: Diamentions.height10,
+                  ),
+                 const Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpandableTextWidget(
+                          text:
+                              'first half haiwl hellow world is goping to ha najhahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw. secound half haiwl hellow world is secound half  goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,'),
+                    ),
+                  )
                 ],
               ),
             ),
           ),
         ]),
         bottomNavigationBar: Container(
-            padding:const EdgeInsets.only(left: 30.0, right: 30.0),
-            height: Diamentions.height50*2,
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+            height: Diamentions.height50 *1.6,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(Diamentions.radious20),
@@ -101,7 +118,6 @@ class PopularFoodDetail extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.only(left: 8.0),
-                        height: 150.0,
                         child: Row(
                           children: [
                             const Icon(Icons.remove),
