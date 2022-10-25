@@ -13,7 +13,7 @@ class ExpandableTextWidget extends StatefulWidget {
 class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   late String firsthalf;
   late String secoundhalf;
-  bool hiddentext = false;
+  bool hiddentext = true;
   double textheight = Diamentions.screenHeight / 5.63;
 
   @override
@@ -32,6 +32,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left:10.0,right: 10.0,top: 10.0,bottom: 30.0),
       child: secoundhalf.isEmpty
           ? SmallText(text: firsthalf)
           : Column(
