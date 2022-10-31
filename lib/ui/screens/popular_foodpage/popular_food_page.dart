@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/data/constants/apiConstants.dart';
+import 'package:food_delivery/data/models/popularProductmodel.dart';
+import 'package:food_delivery/logic/controller/cart_controller.dart';
+import 'package:food_delivery/logic/controller/popular_product_controller.dart';
 import 'package:food_delivery/ui/componants/constants/constants.dart';
 import 'package:food_delivery/ui/componants/constants/diamention.dart';
 import 'package:food_delivery/ui/componants/widgets/appcolumn.dart';
@@ -6,12 +10,18 @@ import 'package:food_delivery/ui/componants/widgets/appicon.dart';
 import 'package:food_delivery/ui/componants/widgets/bigtext.dart';
 import 'package:food_delivery/ui/componants/widgets/expandable_widget_text.dart';
 import 'package:food_delivery/ui/componants/widgets/smalltext.dart';
+import 'package:food_delivery/ui/routes/routes.dart';
+import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({super.key});
+  final int pageId;
+  const PopularFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    ProductModel product =
+        Get.find<PopularProductcontroller>().popularproductList[pageId];
+        Get.find<PopularProductcontroller>().initproduct(Get.find<CartController>());
     return SafeArea(
       child: Scaffold(
         body: Stack(children: [
@@ -21,12 +31,12 @@ class PopularFoodDetail extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 height: Diamentions.foodpageImageheight,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.amber,
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(
-                      'assets/images/secound_page/img4.jpg',
+                    image: NetworkImage(
+                      '${AppConstants.BASE_URL}/uploads/${product.img}',
                     ),
                   ),
                 ),
@@ -40,7 +50,10 @@ class PopularFoodDetail extends StatelessWidget {
                 children: [
                   AppIcon(
                     icon: Icons.arrow_back_ios,
-                    onPressed: (() {}),
+                    onPressed: (() {
+                      Get.toNamed(RouterHelper.getinitial());
+                      // Navigator.pop(context);
+                    }),
                   ),
                   AppIcon(
                     icon: Icons.shopping_cart_outlined,
@@ -55,21 +68,21 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               height: Diamentions.height320,
               padding: EdgeInsets.only(
-                  top: Diamentions.width18,
-                  left: Diamentions.width18,
-                  right: Diamentions.width18,
-                  ),
+                top: Diamentions.width18,
+                left: Diamentions.width18,
+                right: Diamentions.width18,
+              ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(Diamentions.radious20),
                       topRight: Radius.circular(Diamentions.radious20)),
-                    color: Colors.white
-                  ),
+                  color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppColumn(
-                    bigtext: "Biriyani",
+                  AppColumn(
+                    bigtext: product.name.toString(),
+                    description: product.location.toString(),
                   ),
                   SizedBox(
                     height: Diamentions.height20,
@@ -78,11 +91,11 @@ class PopularFoodDetail extends StatelessWidget {
                   SizedBox(
                     height: Diamentions.height10,
                   ),
-                 const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
-                          text:
-                              'first half haiwl hellow world is goping to ha najhahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw. secound half haiwl hellow world is secound half  goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,goping to ha naja ha hahaahbbsdida dsijd jdskfs ffsdkjfhsbfpsfew eu rfuw,'),
+                        text: product.description.toString(),
+                      ),
                     ),
                   )
                 ],
@@ -90,69 +103,78 @@ class PopularFoodDetail extends StatelessWidget {
             ),
           ),
         ]),
-        bottomNavigationBar: Container(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-            height: Diamentions.height50 *1.6,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(Diamentions.radious20),
-                  topRight: Radius.circular(Diamentions.radious20)),
-              color: Colors.black12,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: Diamentions.height50,
-                  padding: EdgeInsets.only(
-                      left: Diamentions.height10,
-                      bottom: Diamentions.height10,
-                      top: Diamentions.height10,
-                      right: Diamentions.height10),
-                  decoration: BoxDecoration(
-                    color: Colors.amberAccent,
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(Diamentions.radious10 * 2)),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.remove),
-                            SizedBox(width: Diamentions.width5),
-                            const BigText(text: '0'),
-                            SizedBox(width: Diamentions.width5),
-                            const Icon(Icons.add),
-                            SizedBox(width: Diamentions.width5),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+        bottomNavigationBar: GetBuilder<PopularProductcontroller>(
+          builder: (popularProduct) {
+            return Container(
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                height: Diamentions.height50 * 1.6,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(Diamentions.radious20),
+                      topRight: Radius.circular(Diamentions.radious20)),
+                  color: Colors.black12,
                 ),
-                SizedBox(
-                  height: Diamentions.height30 * 2,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(Diamentions.radious10 * 2),
-                        ),
-                        backgroundColor: Colorpalatte.maincolor,
-                        foregroundColor: Color.fromARGB(255, 210, 210, 210),
-                        // padding: EdgeInsets.all(15.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: Diamentions.height50,
+                      
+                      decoration: BoxDecoration(
+                        color: Colors.amberAccent,
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Diamentions.radious10 * 2)),
                       ),
-                      onPressed: () {},
-                      child: const SmallText(
-                        text: '\$10 | Add to cart',
-                        size: 16.0,
-                        color: Colors.white,
-                      )),
-                ),
-              ],
-            )),
+                      child: Row(
+                        children: [
+                          Container(
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: () {
+                                    popularProduct.setQauntity(false);
+                                  },
+                                ),
+                                 BigText(text: popularProduct.quantity.toString()),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () {
+                                    popularProduct.setQauntity(true);
+
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: Diamentions.height30 * 2,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(Diamentions.radious10 * 2),
+                            ),
+                            backgroundColor: Colorpalatte.maincolor,
+                            foregroundColor: Color.fromARGB(255, 210, 210, 210),
+                            // padding: EdgeInsets.all(15.0)),
+                          ),
+                          onPressed: () {
+                            popularProduct.addItem(product);
+                          },
+                          child: SmallText(
+                            text: '\$ ${product.price} | Add to cart',
+                            size: 16.0,
+                            color: Color.fromARGB(255, 122, 120, 120),
+                          )),
+                    ),
+                  ],
+                ));
+          }
+        ),
       ),
     );
   }

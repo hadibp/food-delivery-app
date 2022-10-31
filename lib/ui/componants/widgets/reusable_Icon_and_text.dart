@@ -25,11 +25,11 @@ class IconAndTextW extends StatelessWidget {
 // size: 20.0,
           size: Diamentions.iconSize,
         ),
-       const SizedBox(
-          width: 4.0,
-        ),
+      //  const SizedBox(
+      //     width: 4.0,
+      //   ),
         SmallText(text: text,size:textsize),
-        SizedBox(width: 6.0,)
+        // SizedBox(width: 6.0,)
       ],
     );
   }

@@ -17,6 +17,7 @@ class Home extends StatelessWidget {
           elevation: 0.0,
           toolbarHeight: 70.0,
           backgroundColor: Colors.transparent,
+          automaticallyImplyLeading:false,
           title: Column(
             children: const [
              

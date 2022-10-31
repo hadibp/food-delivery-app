@@ -1,11 +1,19 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/data/constants/apiConstants.dart';
+import 'package:food_delivery/data/models/popularProductmodel.dart';
+import 'package:food_delivery/data/repository/recommeded_product_repo.dart';
+import 'package:food_delivery/logic/controller/popular_product_controller.dart';
+import 'package:food_delivery/logic/controller/recommented_product_controller.dart';
 import 'package:food_delivery/ui/componants/constants/constants.dart';
 import 'package:food_delivery/ui/componants/constants/diamention.dart';
 import 'package:food_delivery/ui/componants/widgets/appcolumn.dart';
 import 'package:food_delivery/ui/componants/widgets/bigtext.dart';
 import 'package:food_delivery/ui/componants/widgets/reusable_Icon_and_text.dart';
 import 'package:food_delivery/ui/componants/widgets/smalltext.dart';
+import 'package:food_delivery/ui/routes/routes.dart';
+import 'package:food_delivery/ui/screens/popular_foodpage/popular_food_page.dart';
+import 'package:get/get.dart';
 
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
@@ -42,26 +50,35 @@ class _HomePageBodyState extends State<HomePageBody> {
     /// width = 392
     return Column(
       children: [
-        Container(
-          height: Diamentions.pageViewContainer,
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildpage(position);
-              }),
-        ),
-        DotsIndicator(
-          dotsCount: 5,
-          position: _currentpage,
-          decorator: DotsDecorator(
-            activeColor: Colorpalatte.maincolor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ),
+        GetBuilder<PopularProductcontroller>(builder: (popularproducts) {
+          return popularproducts.isLoaded
+              ? Container(
+                  height: Diamentions.pageViewContainer,
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularproducts.popularproductList.length,
+                      itemBuilder: (context, position) {
+                        return _buildpage(position,
+                            popularproducts.popularproductList[position]);
+                      }),
+                )
+              : const CircularProgressIndicator();
+        }),
+        GetBuilder<PopularProductcontroller>(builder: (popularProducts) {
+          return DotsIndicator(
+            dotsCount: popularProducts.popularproductList.isEmpty
+                ? 2
+                : popularProducts.popularproductList.length,
+            position: _currentpage,
+            decorator: DotsDecorator(
+              activeColor: Colorpalatte.maincolor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
+          );
+        }),
         SizedBox(
           height: Diamentions.height10,
         ),
@@ -71,7 +88,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const BigText(text: 'popular'),
+              const BigText(text: 'Recomended'),
               SizedBox(
                 width: Diamentions.width15,
               ),
@@ -86,53 +103,66 @@ class _HomePageBodyState extends State<HomePageBody> {
             ],
           ),
         ),
-        ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: EdgeInsets.all(Diamentions.height5),
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.all(Diamentions.width15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Diamentions.radious20),
-                color: Color.fromARGB(255, 199, 194, 194),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  //image section
-                  Container(
-                    height: 120.0,
-                    width: 120.0,
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Diamentions.radious20),
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/homepage_image/img2.jpg',
-                          ),
-                          fit: BoxFit.cover),
-                    ),
-                  ),
-                  // text space
-                  SizedBox(
-                    width: Diamentions.height10,
-                  ),
-                 const Expanded(
-                    child: AppColumn(bigtext: 'nutella orange baby',),
-                  )
-                ],
-              ),
-            );
-          },
-        )
+        GetBuilder<RecommendedProductcontroller>(builder: (recomendedproduct) {
+          return recomendedproduct.isLoaded
+              ? ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(Diamentions.height5),
+                  itemCount: recomendedproduct.recommendedproductList.length,
+                  itemBuilder: (context, index) {
+                    ProductModel data =
+                        recomendedproduct.recommendedproductList[index];
+                    return GestureDetector(
+                      onTap: (() {
+                        Get.toNamed(RouterHelper.getRecomentedFood(index));
+                      }),
+                      child: Container(
+                        margin: EdgeInsets.all(Diamentions.width15),
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Diamentions.radious20),
+                          color: Color.fromARGB(255, 241, 241, 241),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 120.0,
+                              width: 120.0,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Diamentions.radious20),
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                      '${AppConstants.BASE_URL}/uploads/${data.img.toString()}',
+                                    ),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                            SizedBox(
+                              width: Diamentions.height10,
+                            ),
+                            Expanded(
+                              child: AppColumn(
+                                bigtext: data.name.toString(),
+                                description: data.description.toString(),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : const CircularProgressIndicator();
+        })
       ],
     );
   }
 
-  Widget _buildpage(int index) {
+  Widget _buildpage(int index, ProductModel popularProduct) {
     Matrix4 matrix = Matrix4.identity();
     if (index == _currentpage.floor()) {
       var currentScale = 1 - (_currentpage - index) * (1 - _scaleFactor);
@@ -163,18 +193,24 @@ class _HomePageBodyState extends State<HomePageBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: Diamentions.pageImageContainer,
-            margin: EdgeInsets.only(
-                right: Diamentions.height20, top: Diamentions.width18),
-            decoration: BoxDecoration(
-                color: index.isOdd ? Colors.blueAccent : Colors.amberAccent,
-                borderRadius: BorderRadius.circular(Diamentions.radious20),
-                image: const DecorationImage(
-                    image: AssetImage(
-                      'assets/images/homepage_image/img1.jpg',
-                    ),
-                    fit: BoxFit.cover)),
+          GestureDetector(
+            onTap: () {
+              
+              Get.toNamed(RouterHelper.getpopularfood(index));
+            },
+            child: Container(
+              height: Diamentions.pageImageContainer,
+              margin: EdgeInsets.only(
+                  right: Diamentions.height20, top: Diamentions.width18),
+              decoration: BoxDecoration(
+                  color: index.isOdd ? Colors.blueAccent : Colors.amberAccent,
+                  borderRadius: BorderRadius.circular(Diamentions.radious20),
+                  image: DecorationImage(
+                      image: NetworkImage(
+                        '${AppConstants.BASE_URL}/uploads/${popularProduct.img}',
+                      ),
+                      fit: BoxFit.cover)),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -206,8 +242,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BigText(
-                        text: "butter Juice",
+                      BigText(
+                        text: popularProduct.name.toString(),
                         size: 23.0,
                       ),
                       SizedBox(
@@ -269,4 +305,3 @@ class _HomePageBodyState extends State<HomePageBody> {
     );
   }
 }
-

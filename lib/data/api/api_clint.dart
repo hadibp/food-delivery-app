@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/data/constants/apiConstants.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 
@@ -11,7 +12,7 @@ class ApiClients extends GetConnect implements GetxController {
   ApiClients({required this.appBaseUrl}) {
     baseUrl = appBaseUrl;
     timeout = const Duration(seconds: 30);
-    token = "";
+    token =  AppConstants.DBTOKEN;
     _mainheaders = {
       'Content-type': 'application/json; charset=UTF-8',
       'Authoization': 'Bearer $token',

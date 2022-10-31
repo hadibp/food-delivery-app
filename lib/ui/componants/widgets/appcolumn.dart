@@ -11,9 +11,11 @@ class AppColumn extends StatelessWidget {
   final String bigtext;
   final double bigtextsize;
   final double smalltextsize;
+  final String description;
+
 
   const AppColumn({
-    Key? key, required this.bigtext,  this.bigtextsize = 24.0,this.smalltextsize = 16.0
+    Key? key, required this.bigtext, required this.description, this.bigtextsize = 24.0,this.smalltextsize = 16.0
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class AppColumn extends StatelessWidget {
         SizedBox(
           height: Diamentions.height10,
         ),
-        const SmallText(text: 'with some charachterstics'),
+         SmallText(text: description),
         SizedBox(
           height: Diamentions.height10,
         ),
@@ -44,12 +46,12 @@ class AppColumn extends StatelessWidget {
                 iconColor: Colors.orangeAccent),
             IconAndTextW(
                 icon: Icons.location_on,
-                text: '1.7 Km',
+                text: '1.7km',
                 textsize: smalltextsize,
                 iconColor: Colorpalatte.maincolor),
             IconAndTextW(
                 icon: Icons.access_time_rounded,
-                text: '34 min',
+                text: '34min',
                 textsize: smalltextsize,
                 iconColor: Colors.orange)
           ],
