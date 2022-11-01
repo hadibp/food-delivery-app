@@ -32,7 +32,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left:10.0,right: 10.0,top: 10.0,bottom: 30.0),
+      padding: const EdgeInsets.only(left:10.0,right: 10.0,top: 10.0,bottom: 30.0),
       child: secoundhalf.isEmpty
           ? SmallText(text: firsthalf)
           : Column(
@@ -47,7 +47,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                     children: <Widget>[
                       Text(
                         hiddentext ? "read more" : "read less",
-                        style: TextStyle(color: Colors.blue),
+                        style: const TextStyle(color: Colors.blue),
                       ),
                     ],
                   ),

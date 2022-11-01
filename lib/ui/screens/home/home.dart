@@ -17,17 +17,22 @@ class Home extends StatelessWidget {
           elevation: 0.0,
           toolbarHeight: 70.0,
           backgroundColor: Colors.transparent,
-          automaticallyImplyLeading:false,
+          automaticallyImplyLeading: false,
           title: Column(
             children: const [
-             
-              BigText(text: 'India',color: Colorpalatte.maincolor,),
-               SmallText(text: 'City',color: Colors.black54,)
+              BigText(
+                text: 'India',
+                color: Colorpalatte.maincolor,
+              ),
+              SmallText(
+                text: 'City',
+                color: Colors.black54,
+              )
             ],
           ),
           actions: [
             Container(
-              margin:  EdgeInsets.all(Diamentions.font15),
+              margin: EdgeInsets.all(Diamentions.font15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Diamentions.radious10),
                 color: Colorpalatte.maincolor,
@@ -40,12 +45,10 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: Container(
+        body: const SizedBox(
           height: 900.0,
-          child:const SingleChildScrollView(child:  HomePageBody())),
-        // bottomNavigationBar: BottomNavigationBar(items: [
-         
-        // ]),
+          child: SingleChildScrollView(child: HomePageBody()),
+        ),
       ),
     );
   }

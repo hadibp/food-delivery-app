@@ -40,7 +40,7 @@ class RecomentedFoodpage extends StatelessWidget {
                     ),
                   ]),
               bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(20.0),
+                  preferredSize: const Size.fromHeight(20.0),
                   child: Container(
                       height: Diamentions.height20 * 2,
                       width: double.maxFinite,
@@ -91,7 +91,7 @@ class RecomentedFoodpage extends StatelessWidget {
                   AppIcon(icon: Icons.add, onPressed: () {}),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               Row(
@@ -111,8 +111,8 @@ class RecomentedFoodpage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(
                                 Diamentions.radious10 * 2),
                           ),
-                          backgroundColor: Color.fromARGB(255, 63, 79, 77),
-                          foregroundColor: Color.fromARGB(255, 210, 210, 210),
+                          backgroundColor:const Color.fromARGB(255, 63, 79, 77),
+                          foregroundColor:const Color.fromARGB(255, 210, 210, 210),
                           // padding: EdgeInsets.all(15.0)),
                         ),
                         onPressed: () {},

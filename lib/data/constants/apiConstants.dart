@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class AppConstants{
   static const String APP_NAME = "DbFood";

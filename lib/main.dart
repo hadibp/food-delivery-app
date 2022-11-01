@@ -4,11 +4,8 @@ import 'package:food_delivery/logic/controller/recommented_product_controller.da
 import 'package:food_delivery/logic/helper/dependacies.dart' as dep;
 import 'package:food_delivery/ui/routes/routes.dart';
 import 'package:food_delivery/ui/screens/home/home.dart';
-import 'package:food_delivery/ui/screens/home/homepagebody.dart';
-import 'package:food_delivery/ui/screens/popular_foodpage/popular_food_page.dart';
 import 'package:get/get.dart';
 
-import 'ui/screens/popular_foodpage/recomentedfoodpage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: RouterHelper.initial,
       getPages: RouterHelper.route,
-      home: Home(),
+      home:const Home(),
     );
   }
 }

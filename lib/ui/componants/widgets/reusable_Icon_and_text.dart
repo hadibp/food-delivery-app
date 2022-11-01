@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:food_delivery/ui/componants/constants/diamention.dart';
 import 'package:food_delivery/ui/componants/widgets/smalltext.dart';

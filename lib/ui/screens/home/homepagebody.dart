@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/data/constants/apiConstants.dart';
 import 'package:food_delivery/data/models/popularProductmodel.dart';
-import 'package:food_delivery/data/repository/recommeded_product_repo.dart';
 import 'package:food_delivery/logic/controller/popular_product_controller.dart';
 import 'package:food_delivery/logic/controller/recommented_product_controller.dart';
 import 'package:food_delivery/ui/componants/constants/constants.dart';
@@ -12,7 +11,6 @@ import 'package:food_delivery/ui/componants/widgets/bigtext.dart';
 import 'package:food_delivery/ui/componants/widgets/reusable_Icon_and_text.dart';
 import 'package:food_delivery/ui/componants/widgets/smalltext.dart';
 import 'package:food_delivery/ui/routes/routes.dart';
-import 'package:food_delivery/ui/screens/popular_foodpage/popular_food_page.dart';
 import 'package:get/get.dart';
 
 class HomePageBody extends StatefulWidget {
@@ -122,7 +120,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(Diamentions.radious20),
-                          color: Color.fromARGB(255, 241, 241, 241),
+                          color: const Color.fromARGB(255, 241, 241, 241),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -133,7 +131,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(Diamentions.radious20),
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                                 image: DecorationImage(
                                     image: NetworkImage(
                                       '${AppConstants.BASE_URL}/uploads/${data.img.toString()}',

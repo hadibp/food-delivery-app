@@ -1,4 +1,3 @@
-import 'package:food_delivery/logic/helper/dependacies.dart';
 import 'package:food_delivery/ui/screens/home/home.dart';
 import 'package:food_delivery/ui/screens/popular_foodpage/popular_food_page.dart';
 import 'package:food_delivery/ui/screens/popular_foodpage/recomentedfoodpage.dart';

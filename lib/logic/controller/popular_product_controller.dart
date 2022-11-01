@@ -1,7 +1,8 @@
-import 'package:food_delivery/data/models/cart_model.dart';
+import 'package:flutter/material.dart';
 import 'package:food_delivery/data/models/popularProductmodel.dart';
 import 'package:food_delivery/data/repository/popularproduct_repository.dart';
 import 'package:food_delivery/logic/controller/cart_controller.dart';
+import 'package:food_delivery/ui/componants/constants/constants.dart';
 import 'package:get/get.dart';
 
 class PopularProductcontroller extends GetxController {
@@ -17,8 +18,8 @@ class PopularProductcontroller extends GetxController {
   int _quantity = 0;
   bool get isLoaded => _isLoaded;
   int get quantity => _quantity;
-  int _cartitem = 0;
-  int get cartitem => _cartitem+quantity;
+  int _incartitem = 0;
+  int get cartitem => _incartitem + _quantity;
 
   Future<dynamic> getPopularProdcutList() async {
     Response response = await popularproductrepo.getPopularProdcut();
@@ -44,13 +45,13 @@ class PopularProductcontroller extends GetxController {
   }
 
   int checkQuatity(int quantity) {
-    if (quantity < 0) {
+    if ((_incartitem + quantity) < 0) {
       Get.snackbar(
         'Item count',
         "you can't reduce more",
       );
       return 0;
-    } else if (quantity > 10) {
+    } else if ((_incartitem + quantity) > 10) {
       Get.snackbar(
         'Item count',
         "you can't add more",
@@ -62,12 +63,29 @@ class PopularProductcontroller extends GetxController {
     }
   }
 
-  void initproduct(CartController cart){
-    _quantity =0;
-    _cartitem=0;
-    _cart=cart;
+  void initproduct(ProductModel productModel, CartController cart) {
+    _quantity = 0;
+    _incartitem = 0;
+    _cart = cart;
+    var existIn = false;
+    existIn = _cart.existInCart(productModel);
+    if (existIn) {
+      _incartitem = _cart.getQuantity(productModel);
+    }
+    print("$_incartitem cart items in  cart");
   }
-  void addItem(ProductModel productModel){
+
+  void addItem(ProductModel productModel) {
     _cart.addItem(productModel, _quantity);
+    _quantity = 0;
+    _incartitem = _cart.getQuantity(productModel);
+    _cart.items.forEach((key, value) {
+      print("the id is ${value.id} and total quantity is ${value.quantity}");
+    });
+    update();
+  }
+
+  int get totalItems {
+    return _cart.totalItems;
   }
 }
