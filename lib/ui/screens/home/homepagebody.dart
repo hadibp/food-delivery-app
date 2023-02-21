@@ -113,14 +113,14 @@ class _HomePageBodyState extends State<HomePageBody> {
                         recomendedproduct.recommendedproductList[index];
                     return GestureDetector(
                       onTap: (() {
-                        Get.toNamed(RouterHelper.getRecomentedFood(index));
+                        Get.toNamed(RouterHelper.getRecomentedFood(index,'home'));
                       }),
                       child: Container(
                         margin: EdgeInsets.all(Diamentions.width15),
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(Diamentions.radious20),
-                          color: const Color.fromARGB(255, 241, 241, 241),
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -194,7 +194,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           GestureDetector(
             onTap: () {
               
-              Get.toNamed(RouterHelper.getpopularfood(index));
+              Get.toNamed(RouterHelper.getpopularfood(index,'home'));
             },
             child: Container(
               height: Diamentions.pageImageContainer,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/data/models/cart_model.dart';
 import 'package:food_delivery/data/models/popularProductmodel.dart';
 import 'package:food_delivery/data/repository/popularproduct_repository.dart';
 import 'package:food_delivery/logic/controller/cart_controller.dart';
@@ -50,6 +51,10 @@ class PopularProductcontroller extends GetxController {
         'Item count',
         "you can't reduce more",
       );
+      if (_incartitem>0) {
+        _quantity=-_incartitem;
+        return _quantity;
+      }
       return 0;
     } else if ((_incartitem + quantity) > 10) {
       Get.snackbar(
@@ -87,5 +92,9 @@ class PopularProductcontroller extends GetxController {
 
   int get totalItems {
     return _cart.totalItems;
+  }
+
+  List<CartModel>get cartlist{
+return _cart.cartlist;
   }
 }

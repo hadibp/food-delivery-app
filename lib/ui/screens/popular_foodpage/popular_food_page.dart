@@ -15,7 +15,9 @@ import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
-  const PopularFoodDetail({super.key, required this.pageId});
+  final String page;
+  const PopularFoodDetail(
+      {super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -52,21 +54,25 @@ class PopularFoodDetail extends StatelessWidget {
                   AppIcon(
                     icon: Icons.arrow_back_ios,
                     onPressed: (() {
-                      Get.toNamed(RouterHelper.getinitial());
                       // Navigator.pop(context);
+                      // Get.back();
+                      if (page == 'cartpage') {
+                        Get.toNamed(RouterHelper.getCartpage());
+                      } else {
+                        Get.toNamed(RouterHelper.getinitial());
+                      }
                     }),
                   ),
                   GetBuilder<PopularProductcontroller>(
                       builder: (popularProductcontroller) {
                     return Stack(children: [
                       AppIcon(
-                        icon: Icons.shopping_cart_outlined,
-                        onPressed: (() {
-                          print(
-                              Get.find<PopularProductcontroller>().totalItems);
-                        }),
-                      ),
-                      Get.find<PopularProductcontroller>().totalItems >= 1
+                          icon: Icons.shopping_cart_outlined,
+                          onPressed: (() {
+                            Get.toNamed(RouterHelper.getCartpage());
+                            // Navigator.push(context, MaterialPageRoute(builder:(context) =>  CartPage()));
+                          })),
+                      popularProductcontroller.totalItems >= 1
                           ? Positioned(
                               right: 5,
                               top: 5,
@@ -87,11 +93,7 @@ class PopularFoodDetail extends StatelessWidget {
                                 )),
                               ),
                             )
-                          : Container(
-                              width: 15.0,
-                              height: 15.0,
-                              color: Color.fromARGB(255, 73, 68, 53),
-                            ),
+                          : Container(),
                     ]);
                   }),
                 ],

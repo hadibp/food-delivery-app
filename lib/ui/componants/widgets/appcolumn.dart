@@ -15,7 +15,7 @@ class AppColumn extends StatelessWidget {
 
 
   const AppColumn({
-    Key? key, required this.bigtext, required this.description, this.bigtextsize = 24.0,this.smalltextsize = 16.0
+    Key? key, required this.bigtext, required this.description, this.bigtextsize = 24.0,this.smalltextsize = 14.0
   }) : super(key: key);
 
   @override

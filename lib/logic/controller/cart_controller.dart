@@ -21,13 +21,15 @@ class CartController extends GetxController {
         (value) {
           totalQuantity = value.quantity! + quantity;
           return CartModel(
-              id: value.id,
-              name: value.name,
-              price: value.price,
-              img: value.img,
-              isExist: true,
-              quantity: value.quantity! + quantity,
-              time: DateTime.now().toString());
+            id: value.id,
+            name: value.name,
+            price: value.price,
+            img: value.img,
+            isExist: true,
+            quantity: value.quantity! + quantity,
+            time: DateTime.now().toString(),
+            product: productModel,
+          );
         },
       );
       if (totalQuantity <= 0) {
@@ -39,13 +41,15 @@ class CartController extends GetxController {
           productModel.id!,
           () {
             return CartModel(
-                id: productModel.id,
-                name: productModel.name,
-                price: productModel.price,
-                img: productModel.img,
-                isExist: true,
-                quantity: quantity,
-                time: DateTime.now().toString());
+              id: productModel.id,
+              name: productModel.name,
+              price: productModel.price,
+              img: productModel.img,
+              isExist: true,
+              quantity: quantity,
+              time: DateTime.now().toString(),
+              product: productModel,
+            );
           },
         );
       } else {
@@ -53,6 +57,7 @@ class CartController extends GetxController {
             backgroundColor: Colorpalatte.maincolor, colorText: Colors.white);
       }
     }
+    update();
   }
 
   bool existInCart(ProductModel productModel) =>
@@ -77,4 +82,18 @@ class CartController extends GetxController {
     });
     return totalQuantity;
   }
+
+  List<CartModel> get cartlist {
+    return _items.entries.map((e) => e.value).toList();
+  }
+  int get totalamount{
+    var total = 0;
+    _items.forEach((key, value) {
+      total+=value.price!*value.quantity!;
+     });
+
+
+    return total;
+  }
+
 }
